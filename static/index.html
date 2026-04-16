@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Laundry Order Management</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">AI-First Assignment Build</p>
+        <h1>Mini Laundry Order Management System</h1>
+        <p class="hero-copy">
+          Create orders, track status, calculate billing, and monitor the day from one lightweight dashboard.
+        </p>
+      </div>
+      <div class="hero-panel">
+        <p class="hero-label">Supported statuses</p>
+        <div id="status-pill-list" class="pill-list"></div>
+      </div>
+    </header>
+
+    <main class="content-grid">
+      <section class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">Dashboard</p>
+            <h2>Daily Snapshot</h2>
+          </div>
+          <button id="refresh-dashboard" class="ghost-button" type="button">Refresh</button>
+        </div>
+        <div class="metrics-grid">
+          <article class="metric-card accent-a">
+            <p>Total Orders</p>
+            <strong id="metric-total-orders">0</strong>
+          </article>
+          <article class="metric-card accent-b">
+            <p>Total Revenue</p>
+            <strong id="metric-total-revenue">Rs 0.00</strong>
+          </article>
+          <article class="metric-card accent-c">
+            <p>Received</p>
+            <strong id="metric-received">0</strong>
+          </article>
+          <article class="metric-card accent-d">
+            <p>Processing</p>
+            <strong id="metric-processing">0</strong>
+          </article>
+          <article class="metric-card accent-e">
+            <p>Ready</p>
+            <strong id="metric-ready">0</strong>
+          </article>
+          <article class="metric-card accent-f">
+            <p>Delivered</p>
+            <strong id="metric-delivered">0</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">Create Order</p>
+            <h2>New Walk-In Order</h2>
+          </div>
+        </div>
+
+        <form id="order-form" class="stack">
+          <div class="form-grid">
+            <label>
+              Customer Name
+              <input type="text" name="customer_name" placeholder="Ananya Rao" required>
+            </label>
+            <label>
+              Phone Number
+              <input type="tel" name="phone" placeholder="9876543210" pattern="[0-9]{10}" maxlength="10" required>
+            </label>
+            <label>
+              Estimated Delivery
+              <input type="date" name="estimated_delivery" required>
+            </label>
+          </div>
+
+          <div class="section-heading compact">
+            <div>
+              <p class="section-label">Garments</p>
+              <h3>Line Items</h3>
+            </div>
+            <button id="add-item" class="ghost-button" type="button">Add Garment</button>
+          </div>
+
+          <p class="helper-copy">
+            Prices are auto-filled from the store rate card when you choose a garment type.
+          </p>
+
+          <div id="order-items" class="items-stack"></div>
+
+          <div class="summary-row">
+            <div>
+              <p class="section-label">Calculated Bill</p>
+              <strong id="order-total-preview">Rs 0.00</strong>
+            </div>
+            <button class="primary-button" type="submit">Create Order</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel wide-panel">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">Orders</p>
+            <h2>Search, Filter, and Update</h2>
+          </div>
+        </div>
+
+        <form id="filters-form" class="filters-grid">
+          <label>
+            Status
+            <select name="status" id="filter-status">
+              <option value="">All</option>
+            </select>
+          </label>
+          <label>
+            Customer / Phone
+            <input type="text" name="query" placeholder="Name or phone">
+          </label>
+          <label>
+            Garment Type
+            <input type="text" name="garment_type" placeholder="Shirt, Saree...">
+          </label>
+          <div class="filter-actions">
+            <button class="ghost-button" type="submit">Apply Filters</button>
+            <button id="reset-filters" class="ghost-button" type="button">Reset</button>
+          </div>
+        </form>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Garments</th>
+                <th>Items</th>
+                <th>Bill</th>
+                <th>ETA</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="orders-table-body">
+              <tr>
+                <td colspan="8" class="empty-state">No orders yet. Create the first order above.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" hidden></div>
+  </div>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>

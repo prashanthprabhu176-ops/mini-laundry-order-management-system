@@ -1,0 +1,136 @@
+{
+  "info": {
+    "name": "Mini Laundry Order Management",
+    "_postman_id": "0bcd2f0f-ec62-4672-ac39-3651a8b8f700",
+    "description": "Collection for the AI-first mini laundry order management assignment.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "health"]
+        }
+      }
+    },
+    {
+      "name": "Get Config",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/config",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "config"]
+        }
+      }
+    },
+    {
+      "name": "Create Order",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"customer_name\": \"Ananya Rao\",\n  \"phone\": \"9876543210\",\n  \"estimated_delivery\": \"2026-04-18\",\n  \"items\": [\n    {\n      \"garment_type\": \"Shirt\",\n      \"quantity\": 2,\n      \"unit_price\": 50\n    },\n    {\n      \"garment_type\": \"Saree\",\n      \"quantity\": 1,\n      \"unit_price\": 180\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/orders",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "orders"]
+        }
+      }
+    },
+    {
+      "name": "List Orders",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/orders",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "orders"]
+        }
+      }
+    },
+    {
+      "name": "Filter Orders",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/orders?status=PROCESSING&query=Ananya&garment_type=Saree",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "orders"],
+          "query": [
+            {
+              "key": "status",
+              "value": "PROCESSING"
+            },
+            {
+              "key": "query",
+              "value": "Ananya"
+            },
+            {
+              "key": "garment_type",
+              "value": "Saree"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Update Status",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"READY\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/orders/{{orderId}}/status",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "orders", "{{orderId}}", "status"]
+        }
+      }
+    },
+    {
+      "name": "Dashboard",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/dashboard",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "dashboard"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8000"
+    },
+    {
+      "key": "orderId",
+      "value": "ORD-REPLACE-ME"
+    }
+  ]
+}
